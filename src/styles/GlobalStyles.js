@@ -16,8 +16,10 @@ const GlobalStyles = createGlobalStyle`
   --clr-neutral-600: hsla(0, 0%, 18%, 1);
   --clr-neutral-700: hsla(0, 0%, 12%, 1);
   --clr-neutral-800: hsla(0, 0%, 2%, 1);
+ 
+  --clr-divider: var(--clr-neutral-300);
 
-  --bg-main: var(--clr-neutral-100);
+  --bg-main: var(--clr-neutral-100); 
 
   /*typography color properties */
   --clr-heading: var(--clr-neutral-600);
@@ -109,12 +111,7 @@ picture,
 svg {
   max-width: 100%;
   display: block;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
+} 
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {

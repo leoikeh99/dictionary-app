@@ -7,11 +7,11 @@ const Wrapper = styled.div``;
 const Label = styled(Ariakit.SelectLabel)``;
 
 const Select = styled(Ariakit.Select)`
-  min-width: 11.438rem;
+  min-width: 8rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.125rem;
+  gap: 1rem;
   color: var(--clr-main-text);
   font-weight: var(--fw-bold);
   font-size: var(--fs-main-text);
@@ -22,6 +22,10 @@ const Select = styled(Ariakit.Select)`
   svg {
     stroke: var(--clr-primary-400);
   }
+
+  &:focus {
+    outline: 2px solid var(--clr-primary-400);
+  }
 `;
 
 const SelectPopover = styled(Ariakit.SelectPopover)`
@@ -29,9 +33,13 @@ const SelectPopover = styled(Ariakit.SelectPopover)`
   gap: 1rem;
   background-color: var(--bg-main);
   box-shadow: var(--dropdown-shadow);
-  padding: 24px;
+  padding: 1rem;
   margin-top: 0.5rem;
   border-radius: 1rem;
+
+  // &:focus {
+  //   outline: 2px solid var(--clr-primary-400);
+  // }
 `;
 
 const SelectItem = styled(Ariakit.SelectItem)`
@@ -63,8 +71,8 @@ const DropDown = ({ values, defaultValue, setValue, label }) => {
       </Ariakit.VisuallyHidden>
       <Select store={select} />
       <SelectPopover store={select} gutter={3} sameWidth>
-        {values.map((value) => (
-          <SelectItem value={value} />
+        {values.map((value, index) => (
+          <SelectItem value={value} key={index} />
         ))}
       </SelectPopover>
     </Wrapper>
