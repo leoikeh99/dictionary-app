@@ -21,9 +21,9 @@ const GlobalStyles = createGlobalStyle`
 
   /*typography color properties */
   --clr-heading: var(--clr-neutral-600);
-  --clr-text-main: var(--clr-neutral-600);
-  --clr-text-sub: var(--clr-neutral-400);
-  --clr-text-primary: var(--clr-primary-400);
+  --clr-main-text: var(--clr-neutral-600);
+  --clr-sub-text: var(--clr-neutral-400);
+  --clr-primary-text: var(--clr-primary-400);
 
   --ff-sans-serif: 'Inter', sans-serif;
   --ff-serif: 'Lora', serif;
@@ -31,10 +31,23 @@ const GlobalStyles = createGlobalStyle`
 
   --ff-body: var(--ff-sans-serif);
 
-  --fs-sm:;
-  --fs-md:;
-  --fs-lg:;
-  --fs-xl:;
+  --spacing-sm: 0.875rem;
+  --spacing-md: 1rem; 
+  --spacing-lg: 1.25rem; 
+  --spacing-xl: 1.5rem; 
+  --spacing-2xl: 2rem;
+  --spacing-4xl: 4rem
+ 
+  --fs-heading: 2rem;
+  --fs-big-text:calc(var(--spacing-md) + 0.125rem);
+  --fs-main-text: calc(var(--spacing-md) - 0.062rem);
+  --fs-sub-text:var(--spacing-md); 
+  --fs-link-text:0.875rem;
+
+  --fw-regular: 400;
+  --fw-bold: 700;
+
+  --dropdown-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Box sizing rules */
