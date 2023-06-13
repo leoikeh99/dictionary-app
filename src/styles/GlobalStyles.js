@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-:root{
+html{ 
   /*colors*/
   --clr-primary-100: hsla(274, 82%, 60%, 0.25);
   --clr-primary-400: hsla(274, 82%, 60%, 1);
@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
   --clr-accent-400: hsla(0, 100%, 66%, 1);
 
   --clr-neutral-100: hsla(0, 0%, 100%, 1);
+  --clr-neutral-150: hsla(0, 0%, 18%, 0.25);
   --clr-neutral-200: hsla(0, 0%, 96%, 1);
   --clr-neutral-300: hsla(0, 0%, 91%, 1);
   --clr-neutral-400: hsla(0, 0%, 46%, 1);
@@ -17,31 +18,32 @@ const GlobalStyles = createGlobalStyle`
   --clr-neutral-700: hsla(0, 0%, 12%, 1);
   --clr-neutral-800: hsla(0, 0%, 2%, 1);
  
-  --clr-divider: var(--clr-neutral-300);
+  
 
   --bg-main: var(--clr-neutral-100); 
+  --bg-input:var(--clr-neutral-200);
+  --bg-horizontal-divider: var(--clr-neutral-300);
 
   /*typography color properties */
   --clr-heading: var(--clr-neutral-600);
   --clr-main-text: var(--clr-neutral-600);
   --clr-sub-text: var(--clr-neutral-400);
   --clr-primary-text: var(--clr-primary-400);
+  --clr-placeholder-text: var(--clr-neutral-150);
 
   --ff-sans-serif: 'Inter', sans-serif;
   --ff-serif: 'Lora', serif;
-  --ff-mono: 'Inconsolata', monospace;
-
-  --ff-body: var(--ff-sans-serif);
+  --ff-mono: 'Inconsolata', monospace; 
 
   --spacing-sm: 0.875rem;
   --spacing-md: 1rem; 
   --spacing-lg: 1.25rem; 
   --spacing-xl: 1.5rem; 
   --spacing-2xl: 2rem;
-  --spacing-4xl: 4rem
+  --spacing-4xl: 4rem;
  
-  --fs-heading: 2rem;
-  --fs-big-text:calc(var(--spacing-md) + 0.125rem);
+  --fs-heading: var(--spacing-2xl);
+  --fs-sub-heading-text:calc(var(--spacing-md) + 0.125rem);
   --fs-main-text: calc(var(--spacing-md) - 0.062rem);
   --fs-sub-text:var(--spacing-md); 
   --fs-link-text:0.875rem;
@@ -50,6 +52,29 @@ const GlobalStyles = createGlobalStyle`
   --fw-bold: 700;
 
   --dropdown-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+  --toggle-shadow:0px 0px 38px 8px rgba(164, 69, 237, 0.76);
+} 
+
+@media(min-width:34.375em){
+  html{
+  --fs-heading: var(--spacing-4xl);
+  --fs-sub-heading-text: var(--spacing-xl) ;
+  --fs-main-text: calc(var(--spacing-md) + 0.125rem);
+  --fs-sub-text:var(--spacing-lg);  
+  }
+}
+ 
+
+html[data-theme="dark"] {  
+  --bg-main: var(--clr-neutral-800);  
+  --bg-input:var(--clr-neutral-700);
+  --bg-horizontal-divider: var(--clr-neutral-500);
+
+  --clr-heading: var(--clr-neutral-100);
+  --clr-main-text: var(--clr-neutral-100);  
+  --clr-placeholder-text: var(--clr-neutral-100);
+  
+  --dropdown-shadow:  0px 5px 30px var(--clr-primary-400);
 }
 
 /* Box sizing rules */
@@ -96,7 +121,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   display: grid;
-  font-family: var(--ff-body);
+  font-family: var(--ff-sans-serif);
   background-color: var(--bg-main);
 }
 

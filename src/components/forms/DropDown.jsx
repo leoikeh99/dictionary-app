@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import * as Ariakit from "@ariakit/react";
 import { styled } from "styled-components";
+import { SettingsContext } from "../../context/SettingsContext";
 
 const Wrapper = styled.div``;
 
@@ -26,6 +27,10 @@ const Select = styled(Ariakit.Select)`
   &:focus {
     outline: 2px solid var(--clr-primary-400);
   }
+
+  @media (min-width: 34.375em) {
+    min-width: 11.438rem;
+  }
 `;
 
 const SelectPopover = styled(Ariakit.SelectPopover)`
@@ -46,6 +51,7 @@ const SelectItem = styled(Ariakit.SelectItem)`
   color: var(--clr-main-text);
   font-weight: var(--fw-bold);
   font-size: var(--fs-main-text);
+  font-family: ${({ ff }) => (ff ? ff : "var(--ff-sans-serif)")};
   cursor: pointer;
 
   &:hover,
@@ -57,6 +63,7 @@ const SelectItem = styled(Ariakit.SelectItem)`
 `;
 
 const DropDown = ({ values, defaultValue, setValue, label }) => {
+  const { getFontVariable } = useContext(SettingsContext);
   const select = Ariakit.useSelectStore({ defaultValue });
   const value = select.useState().value;
 
@@ -72,7 +79,7 @@ const DropDown = ({ values, defaultValue, setValue, label }) => {
       <Select store={select} />
       <SelectPopover store={select} gutter={3} sameWidth>
         {values.map((value, index) => (
-          <SelectItem value={value} key={index} />
+          <SelectItem value={value} key={index} ff={getFontVariable(value)} />
         ))}
       </SelectPopover>
     </Wrapper>

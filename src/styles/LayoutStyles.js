@@ -9,12 +9,14 @@ export const SpaceOut = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: ${({ gap }) => (gap ? `${gap}rem` : "0.5rem")};
 `;
 
 export const FlexGroup = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ gap }) => (gap ? `${gap}rem` : "0.5rem")};
+  flex-wrap: ${({ wrap }) => (wrap ? "wrap" : "no-wrap")};
 `;
 
 export const Divider = styled.span`
@@ -23,5 +25,7 @@ export const Divider = styled.span`
     type === "vertical" ? `${height}rem` : "1px"};
   width: ${({ type }) => (type === "horizontal" ? "100%" : "1px")};
   background: ${({ type }) =>
-    type === "vertical" ? "var(--clr-neutral-300)" : "var(--clr-divider)"};
+    type === "vertical"
+      ? "var(--clr-neutral-300)"
+      : "var(--bg-horizontal-divider)"};
 `;

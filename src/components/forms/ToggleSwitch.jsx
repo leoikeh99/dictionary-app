@@ -52,24 +52,21 @@ const MyCheckBox = styled.input`
   }
 
   &:focus + label {
-    //add focus style
+    box-shadow: var(--toggle-shadow);
+    -webkit-box-shadow: var(--toggle-shadow);
+    -moz-box-shadow: var(--toggle-shadow);
   }
 `;
 
-const ToggleSwitch = ({ defaultStatus, onToggle }) => {
-  const [value, setValue] = useState(defaultStatus);
-
-  const onChange = (e) => {
-    setValue(e.target.checked);
-    onToggle(e.target.checked);
-  };
+const ToggleSwitch = ({ status, onToggle }) => {
+  const onChange = (e) => onToggle();
 
   return (
     <>
       <MyCheckBox
         id="toggleSwitch"
         type="checkbox"
-        checked={value}
+        checked={status}
         onChange={onChange}
       />
       <Label htmlFor="toggleSwitch">

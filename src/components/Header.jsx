@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { styled } from "styled-components";
-import {
-  Container,
-  Divider,
-  FlexGroup,
-  SpaceOut,
-} from "../styles/LayoutStyles";
+import { Container, Divider, SpaceOut } from "../styles/LayoutStyles";
 import DropDown from "./forms/DropDown";
 import ToggleSwitch from "./forms/ToggleSwitch";
 import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import { ReactComponent as MoonIcon } from "../assets/images/icon-moon.svg";
-
-const fontTypes = ["San Serif", "Serif", "Mono"];
+import { SettingsContext } from "../context/SettingsContext";
 
 const Wrapper = styled.header`
   padding-block: 1.5rem;
+
+  @media (min-width: 34.375em) {
+    padding-top: 3.625rem;
+    padding-bottom: 3.188rem;
+  }
 `;
 
-const Tools = styled.div`
+const Settings = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -31,24 +30,24 @@ const ThemeSwitcher = styled.div`
   svg {
     transition: stroke 200ms ease-in-out;
     path {
-      stroke: ${({ darkMode }) => darkMode && "var(--clr-primary-400)"};
+      stroke: ${({ darkmode }) =>
+        darkmode === "true" ? "var(--clr-primary-400)" : ""};
     }
   }
 `;
 
 export default function Header() {
-  const [font, setFont] = useState("San Serif");
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode, font, fontTypes, changeFont } =
+    useContext(SettingsContext);
 
-  const updateFont = (newFont) => setFont(newFont);
-  const toggleTheme = (status) => setDarkMode(status);
+  const updateFont = (newFont) => changeFont(newFont);
 
   return (
     <Wrapper>
       <Container>
         <SpaceOut>
           <Logo />
-          <Tools>
+          <Settings>
             <DropDown
               values={fontTypes}
               defaultValue={font}
@@ -56,11 +55,11 @@ export default function Header() {
               label="Select font"
             />
             <Divider type="vertical" height={2} />
-            <ThemeSwitcher darkMode={darkMode}>
-              <ToggleSwitch defaultStatus={darkMode} onToggle={toggleTheme} />
+            <ThemeSwitcher darkmode={darkMode.toString()}>
+              <ToggleSwitch status={darkMode} onToggle={toggleDarkMode} />
               <MoonIcon />
             </ThemeSwitcher>
-          </Tools>
+          </Settings>
         </SpaceOut>
       </Container>
     </Wrapper>
