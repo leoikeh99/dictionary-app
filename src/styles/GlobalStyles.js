@@ -23,6 +23,7 @@ html{
   --bg-main: var(--clr-neutral-100); 
   --bg-input:var(--clr-neutral-200);
   --bg-horizontal-divider: var(--clr-neutral-300);
+  --bg-loader:var(--clr-primary-400);
 
   /*typography color properties */
   --clr-heading: var(--clr-neutral-600);
@@ -69,6 +70,7 @@ html[data-theme="dark"] {
   --bg-main: var(--clr-neutral-800);  
   --bg-input:var(--clr-neutral-700);
   --bg-horizontal-divider: var(--clr-neutral-500);
+  --bg-loader:var(--clr-primary-100);
 
   --clr-heading: var(--clr-neutral-100);
   --clr-main-text: var(--clr-neutral-100);  

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MainHeading, Text } from "../../../styles/TypographyStyles";
 import { styled } from "styled-components";
 import { PlayButton } from "../../../styles/FormStyles";
 import { ReactComponent as PlayIcon } from "../../../assets/images/icon-play.svg";
 import { VisuallyHidden } from "@ariakit/react";
+import { DictionaryContext } from "../../../context/DictionaryContext";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,18 +25,33 @@ const Word = styled.div`
 `;
 
 const ResultHead = () => {
+  const { result } = useContext(DictionaryContext);
+
+  function playPronunciation() {
+    if (result.phonetics.length < 1) return;
+
+    const audioUrl = result.phonetics.find(
+      (phonetic) => phonetic.audio !== ""
+    ).audio;
+    if (!audioUrl) return;
+
+    let pronunciation = new Audio(audioUrl);
+    pronunciation.play();
+  }
   return (
     <Wrapper>
       <Word>
-        <MainHeading>Keyboard</MainHeading>
+        <MainHeading>{result.word}</MainHeading>
         <Text colortype="primary" fs="sub-heading">
-          /ˈkiːbɔːd/
+          {result.phonetic}
         </Text>
       </Word>
-      <PlayButton>
-        <VisuallyHidden>Play word pronunciation</VisuallyHidden>
-        <PlayIcon />
-      </PlayButton>
+      {result.phonetics.length > 0 && (
+        <PlayButton onClick={playPronunciation}>
+          <VisuallyHidden>Play word pronunciation</VisuallyHidden>
+          <PlayIcon />
+        </PlayButton>
+      )}
     </Wrapper>
   );
 };

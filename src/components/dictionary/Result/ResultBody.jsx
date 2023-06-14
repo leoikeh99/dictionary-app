@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "styled-components";
 import { Link, SubHeading, Text } from "../../../styles/TypographyStyles";
 import { Divider, FlexGroup } from "../../../styles/LayoutStyles";
 import { ReactComponent as NewPageIcon } from "../../../assets/images/icon-new-window.svg";
+import { DictionaryContext } from "../../../context/DictionaryContext";
+import { v4 as uuidv4 } from "uuid";
 
 const LineHeading = styled.div`
   display: flex;
@@ -57,66 +59,70 @@ const SourceText = styled.p`
 `;
 
 const ResultBody = () => {
+  const { result } = useContext(DictionaryContext);
+
   return (
     <div>
-      <LineHeading>
-        <SubHeading>noun</SubHeading>
-        <Divider type="horizontal" />
-      </LineHeading>
-      <Text colortype="sub" fs="sub">
-        Meaning
-      </Text>
-      <MeaningList>
-        <MeaningItem>
-          <Text colortype="main" fs="main">
-            (etc.) A set of keys used to operate a typewriter, computer etc.
+      {result.meanings.map((meaning) => (
+        <div key={uuidv4()}>
+          <LineHeading>
+            <SubHeading>{meaning.partOfSpeech}</SubHeading>
+            <Divider type="horizontal" />
+          </LineHeading>
+          <Text colortype="sub" fs="sub">
+            Meaning
           </Text>
-          <Example colortype="sub" fs="sub"></Example>
-        </MeaningItem>
-        <MeaningItem>
-          <Text colortype="main" fs="main">
-            A component of many instruments including the piano, organ, and
-            harpsichord consisting of usually black and white keys that cause
-            different tones to be produced when struck.
-          </Text>
-        </MeaningItem>
-        <MeaningItem>
-          <Text colortype="main" fs="main">
-            A device with keys of a musical keyboard, used to control electronic
-            sound-producing devices which may be built into or separate from the
-            keyboard device.
-          </Text>
-        </MeaningItem>
-      </MeaningList>
-      <FlexGroup gap={1}>
-        <Text colortype="sub" fs="sub">
-          Synonyms
-        </Text>
-        <Text colortype="primary" fs="sub" fw="bold">
-          electronic keyboard
-        </Text>
-      </FlexGroup>
-      <LineHeading>
-        <SubHeading>verb</SubHeading>
-        <Divider type="horizontal" />
-      </LineHeading>
-      <Text colortype="sub" fs="sub">
-        Meaning
-      </Text>
-      <MeaningList>
-        <MeaningItem>
-          <Text colortype="main" fs="main">
-            To type on a computer keyboard.
-          </Text>
-          <Example colortype="sub" fs="sub">
-            “Keyboarding is the part of this job I hate the most.”
-          </Example>
-        </MeaningItem>
-      </MeaningList>
+          <MeaningList>
+            {meaning.definitions.map((definition) => (
+              <MeaningItem key={uuidv4()}>
+                <Text colortype="main" fs="main">
+                  {definition.definition}
+                </Text>
+                {definition.example && (
+                  <Example colortype="sub" fs="sub">
+                    {definition.example}
+                  </Example>
+                )}
+              </MeaningItem>
+            ))}
+          </MeaningList>
+          {meaning.synonyms.length > 0 && (
+            <FlexGroup gap={1}>
+              <Text colortype="sub" fs="sub">
+                Synonyms
+              </Text>
+              <Text colortype="primary" fs="sub" fw="bold">
+                {meaning.synonyms.map((synonym, index) => (
+                  <span key={uuidv4()}>
+                    {synonym}
+                    {index !== meaning.synonyms.length - 1 && ", "}
+                  </span>
+                ))}
+              </Text>
+            </FlexGroup>
+          )}
+          {meaning.antonyms.length > 0 && (
+            <FlexGroup gap={1}>
+              <Text colortype="sub" fs="sub">
+                Antonyms
+              </Text>
+              <Text colortype="primary" fs="sub" fw="bold">
+                {meaning.antonyms.map((antonyms, index) => (
+                  <span key={uuidv4()}>
+                    {antonyms}
+                    {index !== meaning.antonyms.length - 1 && ", "}
+                  </span>
+                ))}
+              </Text>
+            </FlexGroup>
+          )}
+        </div>
+      ))}
+
       <Source>
         <SourceText>Source</SourceText>
-        <Link href="https://en.wiktionary.org/wiki/keyboard" target="_blank">
-          <span>https://en.wiktionary.org/wiki/keyboard</span> <NewPageIcon />
+        <Link href={result.sourceUrls[0]} target="_blank">
+          <span>{result.sourceUrls[0]}</span> <NewPageIcon />
         </Link>
       </Source>
     </div>
