@@ -30,12 +30,10 @@ const ResultHead = () => {
   function playPronunciation() {
     if (result.phonetics.length < 1) return;
 
-    const audioUrl = result.phonetics.find(
-      (phonetic) => phonetic.audio !== ""
-    ).audio;
-    if (!audioUrl) return;
+    const audio = result.phonetics.find((phonetic) => phonetic.audio !== "");
+    if (!audio) return;
 
-    let pronunciation = new Audio(audioUrl);
+    let pronunciation = new Audio(audio.audio);
     pronunciation.play();
   }
   return (

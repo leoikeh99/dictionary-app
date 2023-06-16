@@ -1,5 +1,5 @@
 import { Form, FormLabel, VisuallyHidden, useFormStore } from "@ariakit/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import SearchInput from "../forms/SearchInput";
 import { ErrorLabel } from "../../styles/FormStyles";
 import { DictionaryContext } from "../../context/DictionaryContext";
@@ -11,6 +11,7 @@ const DictionaryForm = () => {
   form.useSubmit((state) => {
     getWord(state.values.search);
   });
+
   return (
     <Form store={form} resetOnSubmit={false}>
       <VisuallyHidden>

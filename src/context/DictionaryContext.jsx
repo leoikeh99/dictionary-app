@@ -22,6 +22,7 @@ const DictionaryProvider = ({ children }) => {
     }
     setLoading(false);
   }
+
   return (
     <DictionaryContext.Provider value={{ result, loading, error, getWord }}>
       {children}

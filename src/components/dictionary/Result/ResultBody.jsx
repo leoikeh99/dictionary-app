@@ -58,8 +58,23 @@ const SourceText = styled.p`
   text-decoration-color: var(--clr-neutral-400);
 `;
 
+const NewWordBtn = styled.button`
+  color: var(--clr-primary-400);
+  font-size: var(--fs-sub-text);
+  font-weight: var(--fw-bold);
+  margin-right: 0.2rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--clr-primary-400);
+  }
+`;
+
 const ResultBody = () => {
-  const { result } = useContext(DictionaryContext);
+  const { result, getWord } = useContext(DictionaryContext);
 
   return (
     <div>
@@ -91,14 +106,14 @@ const ResultBody = () => {
               <Text colortype="sub" fs="sub">
                 Synonyms
               </Text>
-              <Text colortype="primary" fs="sub" fw="bold">
+              <div>
                 {meaning.synonyms.map((synonym, index) => (
-                  <span key={uuidv4()}>
+                  <NewWordBtn key={uuidv4()} onClick={() => getWord(synonym)}>
                     {synonym}
-                    {index !== meaning.synonyms.length - 1 && ", "}
-                  </span>
+                    {index !== meaning.synonyms.length - 1 && ","}
+                  </NewWordBtn>
                 ))}
-              </Text>
+              </div>
             </FlexGroup>
           )}
           {meaning.antonyms.length > 0 && (
@@ -106,14 +121,14 @@ const ResultBody = () => {
               <Text colortype="sub" fs="sub">
                 Antonyms
               </Text>
-              <Text colortype="primary" fs="sub" fw="bold">
-                {meaning.antonyms.map((antonyms, index) => (
-                  <span key={uuidv4()}>
-                    {antonyms}
-                    {index !== meaning.antonyms.length - 1 && ", "}
-                  </span>
+              <div>
+                {meaning.antonyms.map((antonym, index) => (
+                  <NewWordBtn key={uuidv4()} onClick={() => getWord(antonym)}>
+                    {antonym}
+                    {index !== meaning.antonyms.length - 1 && ","}
+                  </NewWordBtn>
                 ))}
-              </Text>
+              </div>
             </FlexGroup>
           )}
         </div>
