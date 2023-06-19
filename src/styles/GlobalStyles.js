@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-html{ 
+body{ 
   /*colors*/
   --clr-primary-100: hsla(274, 82%, 60%, 0.25);
   --clr-primary-400: hsla(274, 82%, 60%, 1);
@@ -57,7 +57,7 @@ html{
 } 
 
 @media(min-width:34.375em){
-  html{
+  body{
   --fs-heading: var(--spacing-4xl);
   --fs-sub-heading-text: var(--spacing-xl) ;
   --fs-main-text: calc(var(--spacing-md) + 0.125rem);
@@ -66,7 +66,7 @@ html{
 }
  
 
-html[data-theme="dark"] {  
+body[data-theme="dark"] {  
   --bg-main: var(--clr-neutral-800);  
   --bg-input:var(--clr-neutral-700);
   --bg-horizontal-divider: var(--clr-neutral-500);

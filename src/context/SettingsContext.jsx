@@ -4,7 +4,7 @@ export const SettingsContext = createContext();
 
 const SettingsProvider = ({ children }) => {
   const selectedFont = JSON.parse(localStorage.getItem("font"));
-  const fontTypes = ["Sans Serif", "Serif", "Mono"];
+  const fontTypes = ["Serif", "Sans Serif", "Mono"];
   const [darkMode, setDarkMode] = useState(false);
   const [font, setFont] = useState(
     selectedFont ? selectedFont.name : fontTypes[0]
@@ -18,16 +18,13 @@ const SettingsProvider = ({ children }) => {
   function toggleDarkMode() {
     setDarkMode(!darkMode);
     localStorage.setItem("theme", darkMode ? "light" : "dark");
-    document.documentElement.setAttribute(
-      "data-theme",
-      darkMode ? "light" : "dark"
-    );
+    document.body.setAttribute("data-theme", darkMode ? "light" : "dark");
   }
 
   function setPrefferedTheme() {
     const selectedTheme = localStorage.getItem("theme");
     if (selectedTheme) {
-      document.documentElement.setAttribute("data-theme", selectedTheme);
+      document.body.setAttribute("data-theme", selectedTheme);
       setDarkMode(selectedTheme === "dark" ? true : false);
       return;
     }
@@ -38,13 +35,13 @@ const SettingsProvider = ({ children }) => {
     if (prefersLightTheme.matches) {
       setDarkMode(false);
       localStorage.setItem("theme", "light");
-      document.documentElement.setAttribute("data-theme", "light");
+      document.body.setAttribute("data-theme", "light");
       return;
     }
 
     setDarkMode(true);
     localStorage.setItem("theme", "dark");
-    document.documentElement.setAttribute("data-theme", "dark");
+    document.body.setAttribute("data-theme", "dark");
   }
 
   const getFontVariable = (font) =>
