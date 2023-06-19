@@ -36,11 +36,13 @@ const SettingsProvider = ({ children }) => {
       "(prefers-color-scheme: light)"
     );
     if (prefersLightTheme.matches) {
+      setDarkMode(false);
       localStorage.setItem("theme", "light");
       document.documentElement.setAttribute("data-theme", "light");
       return;
     }
 
+    setDarkMode(true);
     localStorage.setItem("theme", "dark");
     document.documentElement.setAttribute("data-theme", "dark");
   }
